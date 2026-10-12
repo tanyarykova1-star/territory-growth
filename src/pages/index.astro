@@ -1,11 +1,315 @@
 ---
-import Welcome from '../components/Welcome.astro';
-import Layout from '../layouts/Layout.astro';
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { directionsData, reviewsData } from '../data/content';
+import { specialists } from '../data/specialists';
+import FaqSection from '../components/FaqSection.astro';
+
+const TELEGRAM_LINK = "https://t.me/center_rostakrd";
+const VK_LINK = "https://vk.ru/center_rostakrd";
+const MAX_LINK = "https://max.ru/join/DzeJu-pPR6HX7pJDbNiDjFXO7B26EEzYe76JcK7k0t0";
+const YCLIENTS_LINK = "https://b2428086.yclients.com/";
+
+// Массив акцентных цветов для динамических плашек
+const accentColors = ['#10B981', '#F97316', '#0284C7', '#8B5CF6', '#EF4444'];
+
+const events = [
+  { day: '12', month: 'сен', tag: 'Творчество', tagColor: '#FF6B00', title: 'Арт-вечер: рисуем себя' },
+  { day: '18', month: 'сен', tag: 'Навыки', tagColor: '#00A3FF', title: 'Мастер-класс «Уверенная речь»' },
+  { day: '24', month: 'сен', tag: 'Психология', tagColor: '#8B5CF6', title: 'Встреча с психологом' },
+  { day: '27', month: 'сен', tag: 'Карьера', tagColor: '#EF4444', title: 'Профессии будущего: что выбрать?' },
+];
 ---
 
-<Layout>
-	<Welcome />
-</Layout>
+<BaseLayout title="Территория Роста — Главная">
+
+<!-- HERO SECTION -->
+<section class="hero">
+<div class="container hero-grid">
+<div class="hero-left">
+<h1 class="hero-title">Место,<br />где <span class="highlight">тебя</span><br />слышат</h1>
+<p class="hero-desc">Центр развития и поддержки подростков и молодёжи. Здесь можно учиться, творить, находить друзей и быть собой.</p>
+<div class="hero-btns">
+<a href="#about" class="btn-dark">Узнать больше &rarr;</a>
+<a href="/directions" class="btn-light-outline">Наши направления</a>
+</div>
+<div class="hero-stats">
+<div class="stat-item"><strong>5</strong><span>направлений</span></div>
+<div class="stat-item"><strong>50+</strong><span>мероприятий в год</span></div>
+<div class="stat-item"><strong>1000+</strong><span>подростков уже с нами</span></div>
+</div>
+</div>
+<div class="hero-right">
+<span class="handwrite handwrite-hero">Больше возможностей рядом ♡</span>
+<div class="hero-media-card">
+<img src="/images/hero-teens.jpg" alt="Подростки" class="hero-img" />
+<a href={TELEGRAM_LINK} target="_blank" rel="noopener noreferrer" class="play-btn">
+<span class="play-icon">▶</span>
+<span>Посмотреть о центре</span>
+</a>
+</div>
+</div>
+</div>
+</section>
+
+<!-- DIRECTIONS -->
+<section id="directions" class="section-padding">
+<div class="container">
+<div class="section-head">
+<div>
+<h2>Направления</h2>
+<span class="handwrite handwrite-sub">Выбирай, что откликается именно тебе ✨</span>
+</div>
+<a href="#directions" class="link-arrow">Все направления &rarr;</a>
+</div>
+<div class="directions-grid">
+<div class="dir-card bg-green">
+<div class="dir-icon">🎓</div>
+<h3>Педагогика</h3>
+<p>Образовательные программы, мастерские, поддержка в учебе</p>
+<span class="dir-arrow">&rarr;</span>
+</div>
+<div class="dir-card bg-orange">
+<div class="dir-icon">🎨</div>
+<h3>Творчество</h3>
+<p>Мастер-классы, арт-проекты, свобода самовыражения</p>
+<span class="dir-arrow">&rarr;</span>
+</div>
+<div class="dir-card bg-blue">
+<div class="dir-icon">💡</div>
+<h3>Навыки</h3>
+<p>Коммуникация, тайм-менеджмент, публичные выступления</p>
+<span class="dir-arrow">&rarr;</span>
+</div>
+<div class="dir-card bg-purple">
+<div class="dir-icon">💜</div>
+<h3>Психология</h3>
+<p>Поддержка, консультации, развитие эмоционального интеллекта</p>
+<span class="dir-arrow">&rarr;</span>
+</div>
+<div class="dir-card bg-pink">
+<div class="dir-icon">📊</div>
+<h3>Карьера</h3>
+<p>Профориентация, наставничество, первые проекты</p>
+<span class="dir-arrow">&rarr;</span>
+</div>
+</div>
+</div>
+</section>
+
+<!-- ABOUT SECTION -->
+<section id="about" class="section-padding">
+<div class="container about-grid">
+<div class="about-text-block">
+<h2>О центре</h2>
+<p>Территория роста — это безопасное и вдохновляющее пространство для подростков, молодёжи и их родителей. Мы объединяем специалистов, волонтёров и всех, кто верит в потенциал молодого поколения.</p>
+<div class="about-btns">
+<a href="/about" class="btn-dark">Наша история &rarr;</a>
+<a href={TELEGRAM_LINK} target="_blank" rel="noopener noreferrer" class="btn-light-outline">Виртуальный тур</a>
+</div>
+</div>
+<div class="about-banner">
+<img src="/images/center.jpg" alt="Пространство центра" class="about-img" />
+<div class="banner-badge">Пространство для идей, людей и тебя 🧡</div>
+</div>
+<div class="support-card">
+<h3>Любая поддержка важна 🧡</h3>
+<p>Вы можете подарить абонемент ребёнку, которому это нужно</p>
+<a href={YCLIENTS_LINK} target="_blank" rel="noopener noreferrer" class="btn-dark">Поддержать &rarr;</a>
+</div>
+</div>
+</section>
+
+<!-- EVENTS -->
+<section class="events-section">
+<div class="container relative-container">
+<div class="section-head text-white">
+<h2>События, которые вдохновляют</h2>
+<a href={TELEGRAM_LINK} target="_blank" rel="noopener noreferrer" class="link-arrow text-white">Все события в Telegram &rarr;</a>
+</div>
+<span class="handwrite handwrite-events">Сюда можно просто прийти ♡</span>
+<div class="events-grid">
+{events.map(e => (
+<a href={TELEGRAM_LINK} target="_blank" rel="noopener noreferrer" class="event-card">
+<div class="event-date">
+<span class="num">{e.day}</span>
+<span class="month">{e.month}</span>
+</div>
+<div class="event-info">
+<span class="event-tag" style={`background: ${e.tagColor}`}>{e.tag}</span>
+<h4>{e.title}</h4>
+</div>
+<span class="event-arrow">&rarr;</span>
+</a>
+))}
+</div>
+</div>
+</section>
+
+<!-- SPECIALISTS -->
+<section class="section-padding">
+<div class="container">
+<div class="section-head">
+<div>
+<h2>Наши специалисты</h2>
+<span class="handwrite handwrite-sub">Взрослые, которые на твоей стороне ❤️</span>
+</div>
+<a href="/specialists" class="link-arrow">Все специалисты &rarr;</a>
+</div>
+<div class="grid-6">
+{specialists.slice(0, 6).map((spec) => (
+<a href="/specialists" class="spec-card" style={`--accent-color: ${spec.color}`}>
+<img src={spec.photo} alt={spec.name} class="spec-img" />
+<div class="spec-info">
+<h3>{spec.name}</h3>
+<p>{spec.role}</p>
+<span class="spec-arrow">&rarr;</span>
+</div>
+</a>
+))}
+</div>
+</div>
+</section>
+
+<!-- ВОПРОС-ОТВЕТ (FAQ) -->
+<FaqSection />
+
+<!-- JOIN BANNER -->
+<section class="join-banner">
+<div class="container join-flex">
+<h2>Вместе больше возможностей</h2>
+<span class="handwrite handwrite-join">Ты можешь больше ♡</span>
+<a href={YCLIENTS_LINK} target="_blank" rel="noopener noreferrer" class="btn-dark">Записаться &rarr;</a>
+</div>
+</section>
+
+</BaseLayout>
+
+<!-- FOOTER -->
+<footer class="footer">
+<div class="container footer-content">
+<div class="footer-left">
+<div class="footer-logo"><strong>ТЕРРИТОРИЯ РОСТА</strong></div>
+<p>© 2026 Центр развития и поддержки подростков и молодёжи<br />г. Краснодар, ул. Каляева, 172</p>
+</div>
+<div class="footer-nav">
+<a href="/about">О нас</a>
+<a href="/directions">Направления</a>
+<a href={TELEGRAM_LINK} target="_blank" rel="noopener noreferrer">События</a>
+<a href="/specialists">Специалисты</a>
+<a href="/contacts">Контакты</a>
+</div>
+<div class="footer-socials">
+<a href={YCLIENTS_LINK} target="_blank" rel="noopener noreferrer" class="btn-footer-booking">Записаться</a>
+<!-- Иконка MAX -->
+<a href={MAX_LINK} target="_blank" rel="noopener noreferrer" class="social-icon" title="MAX" aria-label="MAX">
+<svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12c0 2.85 1.19 5.42 3.1 7.24L4 22l3.2-1.07C8.83 21.52 10.36 22 12 22c5.52 0 10-4.48 10-10S17.52 2 12 2zm0 15c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5z"/></svg>
+</a>
+<!-- Иконка Telegram -->
+<a href={TELEGRAM_LINK} target="_blank" rel="noopener noreferrer" class="social-icon" title="Telegram" aria-label="Telegram">
+<svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69.01-.03.01-.14-.07-.2-.08-.06-.19-.04-.27-.02-.12.02-1.96 1.25-5.54 3.69-.52.36-1 .53-1.42.52-.47-.01-1.37-.26-2.03-.48-.82-.27-1.47-.42-1.42-.88.03-.24.38-.49 1.05-.75 4.12-1.79 6.87-2.97 8.25-3.54 3.92-1.62 4.74-1.9 5.27-1.91.12 0 .37.03.54.17.14.12.19.28.21.43-.01.06.01.24 0 .38z"/></svg>
+</a>
+<!-- Иконка VK -->
+<a href={VK_LINK} target="_blank" rel="noopener noreferrer" class="social-icon" title="VK" aria-label="VK">
+<svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M15.07 2H8.93C4.33 2 2 4.33 2 8.93v6.14C2 19.67 4.33 22 8.93 22h6.14c4.6 0 6.93-2.33 6.93-6.93V8.93C22 4.33 19.67 2 15.07 2zm3.32 12.67h-1.3c-.56 0-.73-.44-.09-.84 1-1.47 1.84-1.47 2.05-2.04v-3.01c0-.44-.14-.71-.62-.71h-1.47c-.36 0-.49.16-.62.53-.68 1.98-1.83 3.73-2.3 3.73-.18 0-.26-.08-.26-.52V9.08c0-.67-.2-.78-.2-.1 0 0-.14-.18-.38-.36-.24-.18-.59-.28-1.07-.28-1.5 0-2.77.96-2.77.96s-.29.28.08.31c.37.03.8.21.88.7.02.13.02 2.1-.23 2.37-.18.18-.42.08-.85-.45-1.05-1.17-1.79-3.0-1.79-3.0s-.1-.21-.36-.21H5.8c-.44 0-.54.21-.44.53.18.9 2.09 3.56 2.09 3.56.16.24.22.36 0 .65-.16.22-.69.68-1.05 1.09-.98 1.1-1.37 1.63-1.53 1.91-.16.29-.08.44.28.44h1.47c.44 0 .54-.23.62-.53.18-.29 2.09-3.57 2.09-3.57s.13-.24.26-.24c.13 0 .22.08.22.44v2.89c0 .44.13.58.58.58h.93c.44 0 .58-.14.58-.58v-2.89c0-.36.09-.44.22-.44.13 0 .26.08.44.24.8.76 1.83 2.92 2.09 3.42.16.29.35.44.75.44h1.47c.44 0 .54-.23.41-.53-.13-.3-.82-1.35-1.55-2.12z"/></svg>
+</a>
+</div>
+</div>
+</footer>
+
+<style>
+/* РУКОПИСНЫЙ ШРИФТ ДЛЯ ПОЛЕЙ */
+.handwrite {font-family: 'Caveat', 'Comic Sans MS', cursive, sans-serif;color: #F97316;font-size: 18px;}
+.handwrite-hero {display: block;margin-bottom: 10px;transform: rotate(-2deg);}
+.handwrite-sub {font-size: 16px;margin-top: 4px;display: block;}
+.handwrite-events {position: absolute;right: 20px;top: -15px;color: #FFD166;transform: rotate(3deg);}
+.handwrite-join {color: #3B82F6;transform: rotate(-3deg);}
+.relative-container { position: relative; }
+
+/* HERO */
+.hero { padding: 40px 0 60px; background: #FFFDF9; }
+.hero-grid { display: grid; grid-template-columns: 1.2fr 1fr; gap: 40px; align-items: center; }
+.hero-title { font-size: 54px; font-weight: 900; line-height: 1.05; color: #111; }
+.highlight { color: #00A3FF; }
+.hero-desc { font-size: 16px; color: #555; margin: 20px 0 30px; max-width: 440px; }
+.hero-btns { display: flex; gap: 12px; margin-bottom: 40px; }
+.hero-stats { display: flex; gap: 30px; border-top: 1px solid #EAEAEA; padding-top: 20px; }
+.stat-item strong { display: block; font-size: 24px; font-weight: 800; }
+.stat-item span { font-size: 13px; color: #666; }
+.hero-media-card { position: relative; border-radius: 24px; overflow: hidden; background: #E2E8F0; }
+.hero-img { width: 100%; height: 420px; object-fit: cover; }
+.play-btn { position: absolute; bottom: 20px; right: 20px; background: #fff; border: none; padding: 12px 20px; border-radius: 100px; display: flex; align-items: center; gap: 10px; font-weight: 600; text-decoration: none; color: #111; box-shadow: 0 4px 20px rgba(0,0,0,0.15); transition: transform 0.2s; }
+.play-btn:hover { transform: scale(1.03); }
+
+/* BUTTONS */
+.btn-dark { background: #0F172A; color: #fff; padding: 14px 24px; border-radius: 100px; font-weight: 600; text-decoration: none; display: inline-block; white-space: nowrap; transition: opacity 0.2s; }
+.btn-dark:hover { opacity: 0.9; }
+.btn-light-outline { border: 1px solid #CBD5E1; padding: 14px 24px; border-radius: 100px; font-weight: 600; text-decoration: none; color: #0F172A; white-space: nowrap; display: inline-block; transition: background 0.2s; }
+.btn-light-outline:hover { background: #F8FAFC; }
+.about-btns { display: flex; gap: 12px; flex-wrap: nowrap; margin-top: 20px; }
+
+/* DIRECTIONS */
+.section-padding { padding: 60px 0; }
+.section-head { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 30px; }
+.directions-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 16px; }
+.dir-card { padding: 20px; border-radius: 16px; position: relative; min-height: 180px; display: flex; flex-direction: column; justify-content: space-between; }
+.bg-green { background: #E6F7ED; }
+.bg-orange { background: #FFEEE2; }
+.bg-blue { background: #E6F4FF; }
+.bg-purple { background: #F3E8FF; }
+.bg-pink { background: #FFE4E6; }
+.dir-card h3 { font-size: 18px; margin: 10px 0 6px; }
+.dir-card p { font-size: 12px; color: #555; }
+
+/* ABOUT & PLACEHOLDER */
+.about-grid { display: grid; grid-template-columns: 1fr 1.5fr 0.8fr; gap: 20px; align-items: stretch; }
+.photo-placeholder { background: #F1F5F9; border: 2px dashed #CBD5E1; border-radius: 20px; position: relative; min-height: 260px; display: flex; align-items: center; justify-content: center; }
+.placeholder-content { display: flex; flex-direction: column; align-items: center; gap: 8px; color: #94A3B8; font-weight: 600; }
+.placeholder-icon { font-size: 32px; }
+.banner-badge { position: absolute; bottom: 15px; left: 15px; background: rgba(255,255,255,0.9); padding: 8px 16px; border-radius: 100px; font-size: 13px; font-weight: 600; }
+.support-card { background: #E0F2FE; padding: 24px; border-radius: 20px; display: flex; flex-direction: column; justify-content: space-between; }
+
+/* EVENTS */
+.events-section { background: #8B5CF6; padding: 60px 0; color: #fff; }
+.events-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+.event-card { background: #fff; color: #111; padding: 16px; border-radius: 16px; display: flex; flex-direction: column; justify-content: space-between; min-height: 160px; text-decoration: none; transition: transform 0.2s; }
+.event-card:hover { transform: translateY(-4px); }
+.event-date .num { font-size: 24px; font-weight: 800; }
+.event-tag { font-size: 10px; color: #fff; padding: 4px 8px; border-radius: 100px; text-transform: uppercase; }
+
+/* SPECIALISTS */
+.grid-6 { display: grid; grid-template-columns: repeat(6, 1fr); gap: 16px; }
+.grid-5 { display: grid; grid-template-columns: repeat(5, 1fr); gap: 16px; }
+.spec-card { position: relative;background: #fff; border-radius: 16px; overflow: hidden; border: 1px solid #EEE; text-decoration: none; color: inherit; transition: transform 0.2s; padding-left: 4px;}
+.spec-card:hover { transform: translateY(-4px); }
+.spec-card::before {content: '';position: absolute;left: 0;top: 0;bottom: 0;width: 5px;background-color: var(--accent-color, #10B981);z-index: 2;}
+.spec-img { width: 100%; height: 180px; object-fit: cover; }
+.spec-info { padding: 12px; }
+.spec-info h3 { font-size: 15px; font-weight: 700; color: #0F172A; }
+.spec-info p { font-size: 12px; color: #64748B; margin-top: 4px; }
+
+/* JOIN BANNER */
+.join-banner { background: #F8FAFC; padding: 40px; border-radius: 24px; margin: 40px 0; border: 1px solid #E2E8F0; }
+.join-flex { display: flex; justify-content: space-between; align-items: center; }
+
+/* FOOTER */
+.footer { background: #0F172A; color: #94A3B8; padding: 40px 0; font-size: 13px; }
+.footer-content { display: flex; justify-content: space-between; align-items: center; }
+.footer-nav { display: flex; gap: 20px; }
+.footer-nav a { color: #94A3B8; text-decoration: none; transition: color 0.2s; }
+.footer-nav a:hover { color: #fff; }
+.footer-socials { display: flex; gap: 12px; align-items: center; }
+.btn-footer-booking {background: #3B82F6;color: #fff;padding: 8px 18px;border-radius: 100px;text-decoration: none;font-weight: 600;transition: background 0.2s;}
+.btn-footer-booking:hover { background: #2563EB; }
+.social-icon {width: 36px;height: 36px;border-radius: 50%;background: #1E293B;color: #94A3B8;display: flex;align-items: center;justify-content: center;text-decoration: none;transition: all 0.2s;}
+.social-icon:hover { background: #334155; color: #fff; }
+.text-white { color: #fff !important; }
+.link-arrow { text-decoration: none; color: #3B82F6; font-weight: 600; }
+
+@media (max-width: 768px) {
+  /* Перевод всех двухколоночных блоков в одну колонку */
+  .hero, .about-section, .stats-grid, .features-grid {flex-direction: column;grid-template-columns: 1fr;text-align: center;}
+  .hero-buttons {flex-direction: column;width: 100%;}
+  .btn-primary, .btn-light-outline {width: 100%; /* Кнопки на всю ширину пальца */text-align: center;}
+}
+</style>

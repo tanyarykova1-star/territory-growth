@@ -1,0 +1,139 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { specialists } from '../../data/specialists';
+---
+
+<BaseLayout title="Наши специалисты — Территория Роста">
+  <section class="section-padding">
+    <div class="container">
+      <div class="page-head">
+        <h1 class="page-title">Наши специалисты</h1>
+        <span class="handwrite">Взрослые, которые на твоей стороне ❤️</span>
+      </div>
+
+      <div class="grid-3">
+        {specialists.map((spec) => (
+          <div class="spec-card" style={`--accent-color: ${spec.color}`}>
+            <div class="spec-img-wrap">
+              <img src={spec.photo} alt={spec.name} class="spec-img" />
+            </div>
+            <div class="spec-info">
+              <h3>{spec.name}</h3>
+              <p class="spec-role">{spec.role}</p>
+              <a href={`/specialists/${spec.slug || spec.id}`} class="btn-dark-full">
+                Подробнее &rarr;
+              </a>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .section-padding { padding: 60px 0; }
+  .page-head { margin-bottom: 40px; }
+  .page-title { font-size: 42px; font-weight: 900; color: #0F172A; margin-bottom: 6px; }
+  
+  .handwrite {
+    font-family: 'Caveat', 'Comic Sans MS', cursive, sans-serif;
+    color: #F97316;
+    font-size: 22px;
+    display: block;
+  }
+
+  .grid-3 {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+
+  /* КАРТОЧКА СПЕЦИАЛИСТА */
+  .spec-card {
+    position: relative;
+    background: #fff;
+    border-radius: 20px;
+    overflow: hidden;
+    border: 1px solid #E2E8F0;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+    display: flex;
+    flex-direction: column;
+    padding-left: 6px; /* Место под цветную полосу */
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+
+  .spec-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.08);
+  }
+
+  /* Цветная вертикальная полоса слева во всю высоту */
+  .spec-card::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 6px;
+    background-color: var(--accent-color, #8B5CF6);
+    z-index: 2;
+  }
+
+  .spec-img-wrap {
+    width: 100%;
+    height: 280px;
+    overflow: hidden;
+  }
+
+  .spec-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .spec-info {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+  }
+
+  .spec-info h3 {
+    font-size: 22px;
+    font-weight: 800;
+    color: #0F172A;
+    margin-bottom: 8px;
+  }
+
+  .spec-role {
+    font-size: 14px;
+    color: #475569; /* Читаемый тёмно-серый цвет */
+    line-height: 1.5;
+    margin-bottom: 20px;
+    flex-grow: 1;
+  }
+
+  .btn-dark-full {
+    background: #0F172A;
+    color: #fff;
+    text-align: center;
+    padding: 12px 20px;
+    border-radius: 100px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: background 0.2s;
+    display: block;
+  }
+
+  .btn-dark-full:hover {
+    background: #1E293B;
+  }
+
+  @media (max-width: 900px) {
+    .grid-3 { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 600px) {
+    .grid-3 { grid-template-columns: 1fr; }
+  }
+</style>

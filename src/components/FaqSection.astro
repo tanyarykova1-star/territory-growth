@@ -1,0 +1,290 @@
+<section class="faq-section">
+  <div class="container">
+    <div class="faq-header">
+      <span class="badge">FAQ</span>
+      <h2>Ответы на частые вопросы</h2>
+      <p>Всё, что важно знать перед первым визитом в «Территорию роста»</p>
+    </div>
+
+    <!-- ТАБЫ (Переключатели рубрик) -->
+    <div class="faq-tabs">
+      <button class="tab-btn active" data-tab="tab-doubts">Сомнения перед визитом</button>
+      <button class="tab-btn" data-tab="tab-subscriptions">Абонементы</button>
+    </div>
+
+    <!-- РУБРИКА 1: Сомнения перед посещением -->
+    <div class="faq-content active" id="tab-doubts">
+      <details class="faq-item">
+        <summary class="faq-title">«Я пока подумаю» <span class="icon"></span></summary>
+        <div class="faq-body">
+          <p>Конечно! ❤️ Сохраним за вами информацию. Если захотите познакомиться — у нас почти каждый день проходят бесплатные игротеки. Напишите нам, и мы подскажем ближайшие даты!</p>
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary class="faq-title">«Не знаю, захочет ли ребёнок» <span class="icon"></span></summary>
+        <div class="faq-body">
+          <p>Рекомендуем начать с бесплатной игротеки! Это не «занятие» — дети просто играют, знакомятся и общаются. Ребёнок сам почувствует, нравится ли ему наше пространство.</p>
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary class="faq-title">«Мы пока не уверены» <span class="icon"></span></summary>
+        <div class="faq-body">
+          <p>Это абсолютно нормально 😊 Можно прийти без обязательств на бесплатную игротеку или разовое мероприятие, всё посмотреть и уже после этого принять решение.</p>
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary class="faq-title">«У нас плотное расписание и кружки» <span class="icon"></span></summary>
+        <div class="faq-body">
+          <p>Мы не заменяем любимые кружки и не добавляем обязательную нагрузку. К нам можно приходить разово, когда удобно — чтобы ребёнок мог сменить обстановку, пообщаться и попробовать что-то новое.</p>
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary class="faq-title">«Нам далеко ехать» <span class="icon"></span></summary>
+        <div class="faq-body">
+          <p>Понимаем вас ❤️ Чтобы поездка была оправданной, вы можете выбрать именно то мероприятие, которое максимально интересно ребёнку. Или оставайтесь с нами на связи — прийдёте, когда будет удобный момент!</p>
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary class="faq-title">«Боимся перегрузить ребёнка» <span class="icon"></span></summary>
+        <div class="faq-body">
+          <p>Наши встречи — это не «учёба», а смена обстановки и приятный досуг. Вы можете приходить время от времени на игротеки или творчество ради удовольствия и общения.</p>
+        </div>
+      </details>
+    </div>
+
+    <!-- РУБРИКА 2: Абонементы -->
+    <div class="faq-content" id="tab-subscriptions">
+      <details class="faq-item Highlight">
+        <summary class="faq-title">💳 Какие у вас есть абонементы и выгода? <span class="icon"></span></summary>
+        <div class="faq-body">
+          <p>Абонементы действуют <strong>2 месяца</strong> на любые платные мероприятия:</p>
+          <ul>
+            <li><strong>6 занятий:</strong> 2 000 ₽ <s>(вместо 3 000 ₽)</s> — ~333 ₽/занятие.</li>
+            <li><strong>10 занятий:</strong> 3 000 ₽ <s>(вместо 5 000 ₽)</s> — 300 ₽/занятие.</li>
+          </ul>
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary class="faq-title">«Можно ли ходить на разные направления?» <span class="icon"></span></summary>
+        <div class="faq-body">
+          <p>Да! В этом главное преимущество: по одному абонементу можно посетить и творчество, и нейрографику, и психологическую игру, и тренинг. Не нужно выбирать что-то одно.</p>
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary class="faq-title">«А если мы не сможем ходить регулярно или пропустим?» <span class="icon"></span></summary>
+        <div class="faq-body">
+          <p>Ничего страшного! Абонемент действует 2 месяца — вы сами выбираете удобные дни и мероприятия. Если пропустили — просто прийдите в другой раз в течение этого срока.</p>
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary class="faq-title">«Можно ли купить абонемент позже?» <span class="icon"></span></summary>
+        <div class="faq-body">
+          <p>Конечно ❤️ Не нужно покупать вслепую. Сначала посетите разовое событие, и если ребёнку понравится — оформим выгодный абонемент.</p>
+        </div>
+      </details>
+    </div>
+
+  </div>
+</section>
+
+<!-- СКРИПТ ДЛЯ ПЕРЕКЛЮЧЕНИЯ ТАБОВ -->
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const tabBtns = document.querySelectorAll('.tab-btn');
+    const tabContents = document.querySelectorAll('.faq-content');
+
+    tabBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const targetTab = btn.getAttribute('data-tab');
+
+        tabBtns.forEach(b => b.classList.remove('active'));
+        tabContents.forEach(c => c.classList.remove('active'));
+
+        btn.classList.add('active');
+        document.getElementById(targetTab)?.classList.add('active');
+      });
+    });
+  });
+</script>
+
+<style>
+  .faq-section {
+    padding: 70px 0;
+    background: linear-gradient(180deg, #f8fafc 0%, #e0f2fe 100%);
+  }
+  .container {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+
+  .faq-header {
+    text-align: center;
+    margin-bottom: 36px;
+  }
+  .badge {
+    background: #0284c7;
+    color: #fff;
+    padding: 4px 14px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 800;
+  }
+  .faq-header h2 {
+    font-size: 32px;
+    font-weight: 900;
+    color: #0f172a;
+    margin: 12px 0 6px;
+  }
+  .faq-header p {
+    color: #64748b;
+    font-size: 16px;
+  }
+
+  /* Переключатели рубрик (Табы) */
+  .faq-tabs {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin-bottom: 30px;
+  }
+  .tab-btn {
+    padding: 12px 24px;
+    border-radius: 30px;
+    border: 2px solid #0284c7;
+    background: #ffffff;
+    color: #0284c7;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  .tab-btn.active, .tab-btn:hover {
+    background: #0284c7;
+    color: #ffffff;
+    box-shadow: 0 4px 15px rgba(2, 132, 199, 0.25);
+  }
+
+  /* Содержимое рубрик */
+  .faq-content {
+    display: none;
+    flex-direction: column;
+    gap: 14px;
+  }
+  .faq-content.active {
+    display: flex;
+  }
+
+  /* Карточки вопросов (Аккордеон) */
+  .faq-item {
+    background: #ffffff;
+    border-radius: 16px;
+    border: 1px solid #e2e8f0;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+    overflow: hidden;
+    transition: all 0.2s ease;
+  }
+  .faq-item[open] {
+    border-color: #00a3ff;
+    box-shadow: 0 8px 20px rgba(0, 163, 255, 0.12);
+  }
+  .faq-item.Highlight {
+    border: 2px solid #ff007a;
+    background: #fff0f7;
+  }
+
+  .faq-title {
+    padding: 20px 24px;
+    font-size: 17px;
+    font-weight: 700;
+    color: #0f172a;
+    cursor: pointer;
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    user-select: none;
+  }
+  .faq-title::-webkit-details-marker {
+    display: none;
+  }
+
+  /* Стрелочка плюсик/минусик */
+  .icon {
+    width: 20px;
+    height: 20px;
+    position: relative;
+    flex-shrink: 0;
+  }
+  .icon::before, .icon::after {
+    content: '';
+    position: absolute;
+    background-color: #0284c7;
+    border-radius: 2px;
+    transition: transform 0.3s ease;
+  }
+  .icon::before {
+    top: 9px; left: 2px; right: 2px; height: 2px;
+  }
+  .icon::after {
+    left: 9px; top: 2px; bottom: 2px; width: 2px;
+  }
+  .faq-item[open] .icon::after {
+    transform: rotate(90deg);
+  }
+
+  .faq-body {
+    padding: 0 24px 20px 24px;
+    color: #334155;
+    font-size: 15px;
+    line-height: 1.6;
+    border-top: 1px solid #f1f5f9;
+    margin-top: 4px;
+    padding-top: 16px;
+  }
+  .faq-body p {
+    margin: 0;
+  }
+  .faq-body ul {
+    margin: 8px 0 0;
+    padding-left: 20px;
+  }
+  .faq-body li {
+    margin-bottom: 6px;
+  }
+
+  /* Мобильная адаптация */
+  @media (max-width: 768px) {
+    .faq-section {
+      padding: 40px 0;
+    }
+    .faq-header h2 {
+      font-size: 24px;
+    }
+    .faq-tabs {
+      flex-direction: column;
+      gap: 8px;
+    }
+    .tab-btn {
+      width: 100%;
+      padding: 10px 16px;
+      font-size: 14px;
+    }
+    .faq-title {
+      padding: 16px;
+      font-size: 15px;
+    }
+    .faq-body {
+      padding: 0 16px 16px 16px;
+      font-size: 14px;
+    }
+  }
+</style>

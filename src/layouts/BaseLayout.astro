@@ -1,0 +1,57 @@
+---
+import '../styles/global.css'; // ← САМАЯ ВАЖНАЯ СТРОКА! Она возвращает стили
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const { 
+  title = "Территория Роста", 
+  description = "Центр развития и поддержки подростков и молодёжи" 
+} = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{title}</title>
+  <meta name="description" content={description} />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+</head>
+<body>
+  <header class="header">
+    <div class="container header__content">
+      <a href="/" class="logo"><strong>ТЕРРИТОРИЯ РОСТА</strong></a>
+      <nav class="nav">
+        <a href="/">Главная</a>
+        <a href="/specialists">Специалисты</a>
+        <a href="/directions">Направления</a>
+        <a href="/opening">Открытие</a>
+      </nav>
+      <a href="https://b2428086.yclients.com/" class="ms_booking btn-primary">Записаться &rarr;</a>
+    </div>
+  </header>
+
+  <main>
+    <slot />
+  </main>
+</body>
+</html>
+
+    <footer style="background: #0D1B35; color: #fff; padding: 40px 0; margin-top: 60px;">
+      <div class="container" style="display: flex; justify-content: space-between; flex-wrap: wrap; gap: 20px;">
+        <div>
+          <p><strong>Адрес:</strong> г. Краснодар, ул. Каляева, 172</p>
+          <p>© 2026 Центр развития и поддержки подростков и молодёжи</p>
+        </div>
+        <div style="display: flex; gap: 15px;">
+          <a href="https://t.me/center_rostakrd" target="_blank" style="color: #66D36E;">Telegram</a>
+          <a href="https://vk.ru/center_rostakrd" target="_blank" style="color: #66D36E;">VK</a>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

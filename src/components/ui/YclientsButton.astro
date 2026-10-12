@@ -1,0 +1,15 @@
+---
+interface Props {
+  text?: string;
+  classNames?: string;
+}
+
+const { text = "Записаться", classNames = "" } = Astro.props;
+---
+
+<!-- Кнопка Yclients использует специальный класс ms_booking для вызова окна -->
+<a href="https://b2428086.yclients.com/" class={ms_booking btn-primary ${classNames}}>
+  {text}
+</a>
+
+<script type="text/javascript" src="https://w2428086.yclients.com/widgetJS" charset="UTF-8"></script>

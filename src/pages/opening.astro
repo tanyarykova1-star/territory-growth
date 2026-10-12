@@ -1,0 +1,449 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+// Отзывы, распознанные с скриншотов
+const reviews = [
+  {
+    author: "Галина Извекова",
+    text: "Добрый день! Ольга, огромное СПАСИБО Вам и вашей команде за такой чудесный проект! Это действительно территория роста! И не только для подростков, но и для их родителей, что очень важно. Дочь в полном восторге от уже посетивших мероприятий, готова посещать каждый день. Отдельная благодарность от меня лично Вам и Ларисе Бондаренко! Ваши тренинги для родителей - очень сильный толчок в развитии личности и семьи. ❤️🌹",
+    tag: "Родитель"
+  },
+  {
+    author: "Наталья Волкова",
+    text: "Здравствуйте! Очень благодарна за эту встречу 💐 Простые понятные практики от психолога Ларисы, поддерживающая атмосфера, разные мнения участников и возможность обсудить. Остались инсайты, информация к размышлению и хорошее настроение 🥰",
+    tag: "Участник тренинга"
+  },
+  {
+    author: "Наталья Волкова",
+    text: "Получила в вашем центре консультацию у психолога Виктории Минаковой. Запрос был - сформулировать важный разговор и снизить тревожность. Всё записала и использовала. Результатом довольна. Спасибо большое пребольшое 🥰",
+    tag: "Консультация"
+  },
+  {
+    author: "Елена Решетникова",
+    text: "Ольга, спасибо вам за мероприятие! Детям понравилось! Будем следить за вашими мероприятиями и обязательно посещать. Спасибо!",
+    tag: "Родитель"
+  },
+  {
+    author: "Мама участницы",
+    text: "Доброе утро! Только сейчас увидела сообщения. Спасибо большое! 🌹 Дочь вчера приехала домой в полном восторге! Только и говорила о том, как провела время 😃",
+    tag: "Отзыв из чата"
+  },
+  {
+    author: "Участник игры",
+    text: "Игра очень понравилась 🪻 Мальчикам интересно было пофантазировать и познакомиться с ребятами, услышать другие мнения. Спасибо большое 🪷",
+    tag: "Игропрактика"
+  }
+];
+
+// Массивы для генерации сетки медиафайлов
+const videos = Array.from({ length: 18 }, (_, i) => i + 1);
+const photos = Array.from({ length: 15 }, (_, i) => i + 1);
+---
+
+<BaseLayout 
+  title="Открытие центра и отзывы — Территория Роста"
+  description="Как прошло открытие центра 'Территория Роста': отзывы гостей, фото и видеоотчёт, а также официальные документы учреждения."
+>
+  <div class="opening-page">
+    <div class="container">
+      
+      <!-- Заголовок страницы -->
+      <header class="page-header">
+        <span class="badge">Событие</span>
+        <h1>Открытие центра «Территория Роста»</h1>
+        <p class="subtitle">Наша история, отзывы первых участников, фото/видеоотчёт и официальная документация.</p>
+      </header>
+
+      <!-- БЛОК 1: Отзывы -->
+      <section class="section-block">
+        <div class="section-title-wrap">
+          <h2>💬 Отзывы родителей и участников</h2>
+          <p>Впечатления тех, кто уже побывал на наших тренингах, играх и консультациях</p>
+        </div>
+
+        <div class="reviews-grid">
+          {reviews.map(item => (
+            <div class="review-card">
+              <div class="review-header">
+                <div class="avatar">{item.author[0]}</div>
+                <div>
+                  <h3>{item.author}</h3>
+                  <span class="review-tag">{item.tag}</span>
+                </div>
+              </div>
+              <p class="review-text">{item.text}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <!-- БЛОК 2: Фотогалерея (15 фото) -->
+      <section class="section-block">
+        <div class="section-title-wrap">
+          <h2>📸 Фотоотчёт с открытия (15 фото)</h2>
+          <p>Яркие моменты нашего праздника</p>
+        </div>
+
+        <div class="photo-grid">
+          {photos.map(num => (
+            <div class="photo-card">
+              <!-- Замени пути на свои файлы в public/images/opening/photo-1.jpg и т.д. -->
+              <img src={`/images/opening/photo-${num}.jpg`} alt={`Фото открытия ${num}`} loading="lazy" onerror="this.src='https://placehold.co/600x400/e2e8f0/64748b?text=Фото+'+this.dataset.num" data-num={num} />
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <!-- БЛОК 3: Видеогалерея (18 видео) -->
+      <section class="section-block">
+        <div class="section-title-wrap">
+          <h2>🎬 Видео с открытия (18 видео)</h2>
+          <p>Атмосфера, выступления и эмоции в видеоформате</p>
+        </div>
+
+        <div class="video-grid">
+          {videos.map(num => (
+            <div class="video-card">
+              <div class="video-wrapper">
+                <!-- В будущем тут можно заменить на <iframe src="..."> с Rutube/VK/YouTube -->
+                <video controls preload="metadata" poster={`/images/opening/video-thumb-${num}.jpg`}>
+                  <source src={`/videos/opening/video-${num}.mp4`} type="video/mp4" />
+                  Ваш браузер не поддерживает видео.
+                </video>
+              </div>
+              <span class="video-caption">Видео №{num}</span>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <!-- БЛОК 4: Документы учреждения -->
+      <section class="documents">
+  <h2>Документы учреждения</h2>
+  <p class="subtitle">Официальная информация и правовые документы</p>
+
+  <div class="docs-grid">
+    <a href="/docs/ustav.pdf" target="_blank" class="doc-card">
+      <div class="doc-icon">PDF</div>
+      <div class="doc-text">
+        <h3>Устав организации</h3>
+        <p>PDF · Основной учредительный документ</p>
+      </div>
+    </a>
+  </div>
+</section>
+
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+/* Отступ сверху для контейнера карточек */
+.docs-grid {
+  margin-top: 32px; /* Отодвигает прямоугольник ниже от подзаголовка */
+  display: flex;
+  justify-content: center; /* Центрирует карточку */
+}
+
+/* Выравнивание содержимого внутри самого прямоугольника */
+.doc-card {
+  display: flex;
+  align-items: center; /* Выравнивает иконку PDF и текст по вертикали */
+  gap: 20px; /* Зазор между иконкой PDF и текстом */
+  padding: 24px 32px;
+  max-width: 450px;
+  width: 100%;
+}
+
+.doc-text h3 {
+  margin: 0 0 4px 0; /* Отступ под заголовком «Устав организации» */
+}
+
+.doc-text p {
+  margin: 0; /* Убирает лишние выпадающие отступы у подписи */
+}
+/* Обычное состояние карточки */
+.doc-card {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 24px;
+  border-radius: 16px;
+  background-color: rgba(255, 255, 255, 0.5); /* Полупрозрачная */
+  border: 1px solid transparent;
+  text-decoration: none;
+  color: inherit;
+  transition: all 0.3s ease; /* Плавный переход */
+}
+
+/* Состояние при наведении (как на твоём скриншоте со стрелочкой) */
+.doc-card:hover {
+  background-color: #ffffff; /* Заливка становится полностью белой */
+  border-color: #fca5a5; /* Розовая обводка */
+  box-shadow: 0 8px 24px rgba(252, 165, 165, 0.25); /* Розовое свечение/тень */
+  transform: translateY(-2px); /* Легкий приподъем вверх */
+}
+  .opening-page {
+    padding: 60px 0 100px;
+    /* Яркий, мягкий градиентный фон вместо скучного серого */
+    background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 50%, #f5f3ff 100%);
+    min-height: 100vh;
+  }
+
+  .container {
+    max-width: 1140px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+
+  /* Шапка страницы */
+  .page-header {
+    text-align: center;
+    margin-bottom: 60px;
+  }
+  .badge {
+    background: linear-gradient(90deg, #ff007a, #9333ea);
+    color: #ffffff;
+    padding: 8px 20px;
+    border-radius: 30px;
+    font-size: 14px;
+    font-weight: 800;
+    letter-spacing: 0.5px;
+    box-shadow: 0 4px 15px rgba(255, 0, 122, 0.3);
+    display: inline-block;
+  }
+  .page-header h1 {
+    font-size: 42px;
+    font-weight: 900;
+    /* Градиентный текст для главного заголовка */
+    background: linear-gradient(90deg, #0f172a 0%, #0284c7 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin: 20px 0 12px;
+  }
+  .subtitle {
+    color: #475569;
+    font-size: 19px;
+    font-weight: 500;
+  }
+
+  /* Секции */
+  .section-block {
+    margin-bottom: 80px;
+  }
+  .section-title-wrap {
+    margin-bottom: 30px;
+  }
+  .section-title-wrap h2 {
+    font-size: 28px;
+    font-weight: 900;
+    color: #0f172a;
+  }
+  .section-title-wrap p {
+    color: #64748b;
+    font-size: 16px;
+    margin-top: 4px;
+  }
+
+  /* ЯРКИЕ КАРТОЧКИ ОТЗЫВОВ */
+  .reviews-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 24px;
+  }
+  .review-card {
+    background: #ffffff;
+    border-radius: 20px;
+    padding: 28px;
+    /* Сочная цветная рамка сбоку */
+    border-left: 6px solid #00a3ff;
+    box-shadow: 0 10px 25px -5px rgba(14, 165, 233, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.05);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  /* Чередование цветов полосок на карточках */
+  .review-card:nth-child(2n) { border-left-color: #ff007a; }
+  .review-card:nth-child(3n) { border-left-color: #9333ea; }
+  .review-card:nth-child(4n) { border-left-color: #10b981; }
+
+  .review-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 20px 30px -10px rgba(0, 0, 0, 0.12);
+  }
+
+  .review-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 16px;
+  }
+  .avatar {
+    width: 48px;
+    height: 48px;
+    background: linear-gradient(135deg, #00a3ff, #0066ff);
+    color: white;
+    font-weight: 800;
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    box-shadow: 0 4px 10px rgba(0, 163, 255, 0.3);
+  }
+  .review-card:nth-child(2n) .avatar { background: linear-gradient(135deg, #ff007a, #ff4d94); box-shadow: 0 4px 10px rgba(255, 0, 122, 0.3); }
+  .review-card:nth-child(3n) .avatar { background: linear-gradient(135deg, #9333ea, #c084fc); box-shadow: 0 4px 10px rgba(147, 51, 234, 0.3); }
+
+  .review-header h3 {
+    font-size: 17px;
+    font-weight: 800;
+    margin: 0;
+    color: #0f172a;
+  }
+  .review-tag {
+    font-size: 12px;
+    font-weight: 700;
+    color: #0284c7;
+    background: #e0f2fe;
+    padding: 3px 10px;
+    border-radius: 8px;
+  }
+  .review-text {
+    color: #334155;
+    line-height: 1.65;
+    font-size: 15px;
+    margin: 0;
+  }
+
+  /* ЯРКАЯ ФОТОГАЛЕРЕЯ */
+  .photo-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 18px;
+  }
+  .photo-card {
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
+    background: #fff;
+  }
+  .photo-card img {
+    width: 100%;
+    height: 190px;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.4s ease;
+  }
+  .photo-card:hover img {
+    transform: scale(1.08);
+  }
+
+  /* ЯРКАЯ ВИДЕОГАЛЕРЕЯ */
+  .video-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 22px;
+  }
+  .video-card {
+    background: #ffffff;
+    border-radius: 20px;
+    padding: 12px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+    border: 2px solid #f1f5f9;
+    transition: transform 0.3s ease, border-color 0.3s ease;
+  }
+  .video-card:hover {
+    transform: translateY(-4px);
+    border-color: #00a3ff;
+  }
+  .video-wrapper video {
+    width: 100%;
+    border-radius: 12px;
+    background: #000;
+  }
+  .video-caption {
+    display: block;
+    margin-step: 10px;
+    margin-top: 8px;
+    font-weight: 700;
+    font-size: 14px;
+    color: #0284c7;
+    text-align: center;
+  }
+
+  /* ЯРКИЕ ДОКУМЕНТЫ */
+  .docs-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+  }
+  .doc-item {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    background: #ffffff;
+    padding: 22px;
+    border-radius: 18px;
+    border: 2px solid #e2e8f0;
+    text-decoration: none;
+    color: #0f172a;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+    transition: all 0.3s ease;
+  }
+  .doc-item:hover {
+    border-color: #ff007a;
+    background: #fff0f7;
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(255, 0, 122, 0.15);
+  }
+  .doc-icon {
+    font-size: 36px;
+  }
+  .doc-item strong {
+    display: block;
+    font-size: 16px;
+    font-weight: 800;
+  }
+  .doc-item span {
+    font-size: 13px;
+    color: #64748b;
+    font-weight: 600;
+  }
+
+  @media (max-width: 768px) {
+  .opening-page {
+    padding: 30px 0 60px;
+  }
+
+  .page-header h1 {
+    font-size: 26px;
+  }
+
+  .subtitle {
+    font-size: 15px;
+  }
+
+  /* Превращаем сетки в 1 колонку на смартфонах */
+  .reviews-grid,
+  .video-grid,
+  .docs-grid {
+    grid-template-columns: 1fr; /* По 1 карточке в ряд */
+    gap: 16px;
+  }
+
+  /* Фотогалерея в 2 колонки для удобства */
+  .photo-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+
+  .photo-card img {
+    height: 130px;
+  }
+
+  .doc-item {
+    padding: 16px;
+  }
+}
+</style>

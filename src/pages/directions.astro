@@ -1,0 +1,165 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { services } from '../data/services';
+---
+
+<BaseLayout title="Направления и каталог услуг — Территория Роста">
+  <section class="catalog-section">
+    <div class="container">
+      <h1 class="page-title">Направления и услуги</h1>
+
+      <!-- Умный поиск -->
+      <div class="search-box">
+        <span class="search-icon">🔍</span>
+        <input 
+          type="text" 
+          id="siteSearch" 
+          placeholder="Поиск по направлениям, специалистам и темам..." 
+        />
+      </div>
+
+      <!-- Фильтры как у WB (Все / Детям / Подросткам / Взрослым) -->
+      <div class="tabs">
+        <button class="tab-btn active" data-category="all">Все направления</button>
+        <button class="tab-btn" data-category="children">Детям</button>
+        <button class="tab-btn" data-category="teens">Подросткам и молодёжи</button>
+        <button class="tab-btn" data-category="adults">Взрослым</button>
+      </div>
+
+      <!-- Сетка каталога -->
+      <div class="services-grid" id="servicesGrid">
+        {services.map((item) => (
+          <div 
+            class="service-card" 
+            data-category={item.category}
+            data-search={`${item.title} ${item.description} ${item.specialistName} ${item.categoryLabel}`.toLowerCase()}
+          >
+            <div class="card-header">
+              <span class={`badge badge-${item.category}`}>{item.categoryLabel}</span>
+              <span class="age-badge">{item.age}</span>
+            </div>
+
+            <h3>{item.title}</h3>
+            
+            <div class="meta-info">
+              <p>📅 <strong>Расписание:</strong> {item.schedule}</p>
+              <p>
+                👤 <strong>Специалист:</strong> 
+                <a href={`/specialists/${item.specialistId}`}>{item.specialistName}</a>
+              </p>
+            </div>
+
+            <p class="description">{item.description}</p>
+
+            <a href="https://b2428086.yclients.com/" target="_blank" class="btn-card">
+              Записаться
+            </a>
+          </div>
+        ))}
+      </div>
+
+      <div id="noResults" class="no-results hidden">
+        По вашему запросу ничего не найдено.
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<script>
+  const searchInput = document.getElementById('siteSearch') as HTMLInputElement;
+  const tabButtons = document.querySelectorAll('.tab-btn');
+  const cards = document.querySelectorAll('.service-card') as NodeListOf<HTMLElement>;
+  const noResults = document.getElementById('noResults');
+
+  let currentCategory = 'all';
+
+  function filterCards() {
+    const query = searchInput.value.toLowerCase().trim();
+    let visibleCount = 0;
+
+    cards.forEach((card) => {
+      const categoryMatch = currentCategory === 'all' || card.dataset.category === currentCategory;
+      const searchMatch = !query || card.dataset.search?.includes(query);
+
+      if (categoryMatch && searchMatch) {
+        card.style.display = 'flex';
+        visibleCount++;
+      } else {
+        card.style.display = 'none';
+      }
+    });
+
+    if (noResults) {
+      noResults.classList.toggle('hidden', visibleCount > 0);
+    }
+  }
+
+  tabButtons.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      tabButtons.forEach((b) => b.classList.remove('active'));
+      btn.classList.add('active');
+      currentCategory = (btn as HTMLElement).dataset.category || 'all';
+      filterCards();
+    });
+  });
+
+  searchInput?.addEventListener('input', filterCards);
+</script>
+
+<style>
+  .catalog-section { padding: 40px 0 80px; }
+  .container { max-width: 1100px; margin: 0 auto; padding: 0 16px; }
+  .page-title { font-size: 32px; font-weight: 900; margin-bottom: 24px; color: #0F172A; }
+
+  .search-box { position: relative; margin-bottom: 24px; }
+  .search-box input {
+    width: 100%;
+    padding: 16px 20px 16px 48px;
+    border-radius: 100px;
+    border: 2px solid #E2E8F0;
+    font-size: 16px;
+    outline: none;
+    box-sizing: border-box;
+  }
+  .search-box input:focus { border-color: #00A3FF; }
+  .search-icon { position: absolute; left: 18px; top: 50%; transform: translateY(-50%); }
+
+  .tabs { display: flex; gap: 10px; margin-bottom: 32px; flex-wrap: wrap; }
+  .tab-btn {
+    padding: 10px 20px;
+    border-radius: 100px;
+    border: 1px solid #E2E8F0;
+    background: #fff;
+    cursor: pointer;
+    font-weight: 600;
+    color: #475569;
+    transition: all 0.2s;
+  }
+  .tab-btn.active, .tab-btn:hover { background: #00A3FF; color: #fff; border-color: #00A3FF; }
+
+  .services-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 24px; }
+  .service-card {
+    background: #fff;
+    border: 1px solid #E2E8F0;
+    border-radius: 20px;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+  .badge { padding: 4px 12px; border-radius: 100px; font-size: 12px; font-weight: 700; }
+  .badge-children { background: #FEF3C7; color: #D97706; }
+  .badge-teens { background: #E0E7FF; color: #4338CA; }
+  .badge-adults { background: #FCE7F3; color: #BE185D; }
+  .age-badge { font-size: 13px; font-weight: 600; color: #64748B; }
+
+  .service-card h3 { font-size: 20px; font-weight: 800; color: #0F172A; margin-bottom: 12px; }
+  .meta-info p { font-size: 14px; color: #64748B; margin-bottom: 6px; }
+  .meta-info a { color: #00A3FF; text-decoration: none; font-weight: 600; }
+  .description { color: #334155; font-size: 14px; margin: 16px 0; line-height: 1.5; }
+
+  .btn-card { text-align: center; background: #0F172A; color: #fff; padding: 12px; border-radius: 100px; text-decoration: none; font-weight: 600; }
+  .no-results { text-align: center; padding: 40px; color: #94A3B8; font-size: 18px; }
+  .hidden { display: none; }
+</style>

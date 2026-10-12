@@ -1,0 +1,174 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { specialists } from '../../data/specialists';
+
+export function getStaticPaths() {
+  return specialists.map((spec) => ({
+    params: { slug: spec.id },
+    props: { spec },
+  }));
+}
+
+const { spec } = Astro.props;
+
+const docImages = Array.from(
+  { length: spec.docsCount },
+  (_, i) => `/images/docs/${spec.id}/${i + 1}.jpg`
+);
+---
+
+<BaseLayout title={`${spec.name} — Специалист центра`}>
+  <section class="section-padding">
+    <div class="container">
+      <a href="/specialists" class="back-link">&larr; Назад к специалистам</a>
+
+      <div class="spec-detail-card" style={`--accent-color: ${spec.color}`}>
+        <div class="spec-main-info">
+          <img src={spec.photo} alt={spec.name} class="spec-detail-img" />
+          
+          <div class="spec-text">
+            <h1>{spec.name}</h1>
+            <p class="spec-role">{spec.role}</p>
+            
+            <div class="bio-block">
+              {spec.bio.map((paragraph) => (
+                <p>{paragraph}</p>
+              ))}
+            </div>
+
+            {spec.requests && (
+              <div class="requests-block">
+                <h3>С чем можно обратиться:</h3>
+                <ul>
+                  {spec.requests.map((item) => (
+                    <li>{item}</li>
+                  ))}
+                </ul>
+              </div>
+            )}
+
+            <a href="https://b2428086.yclients.com/" target="_blank" class="btn-primary">
+              Записаться к специалисту &rarr;
+            </a>
+          </div>
+        </div>
+
+        {docImages.length > 0 && (
+          <div class="docs-section">
+            <h2>Дипломы и сертификаты</h2>
+            <div class="docs-grid">
+              {docImages.map((imgSrc, index) => (
+                <a href={imgSrc} target="_blank" class="doc-item">
+                  <img src={imgSrc} alt={`Диплом ${index + 1}`} loading="lazy" />
+                </a>
+              ))}
+            </div>
+          </div>
+        )}
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .section-padding { padding: 40px 0 80px; }
+  .container { max-width: 900px; margin: 0 auto; padding: 0 16px; }
+  
+  .back-link {
+    display: inline-block;
+    color: #00A3FF;
+    text-decoration: none;
+    font-weight: 700;
+    margin-bottom: 24px;
+  }
+
+  .spec-detail-card {
+    background: #fff;
+    padding: 40px;
+    border-radius: 24px;
+    border: 1px solid #E2E8F0;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.04);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .spec-detail-card::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 8px;
+    background-color: var(--accent-color, #8B5CF6);
+  }
+
+  .spec-main-info {
+    display: flex;
+    gap: 32px;
+    margin-bottom: 40px;
+  }
+
+  .spec-detail-img {
+    width: 260px;
+    height: 320px;
+    object-fit: cover;
+    border-radius: 16px;
+    flex-shrink: 0;
+  }
+
+  .spec-text { flex: 1; }
+  .spec-text h1 { font-size: 32px; font-weight: 900; color: #0F172A; margin-bottom: 8px; }
+  .spec-role { font-size: 16px; font-weight: 600; color: var(--accent-color, #8B5CF6); margin-bottom: 20px; line-height: 1.4; }
+  
+  .bio-block p { color: #475569; line-height: 1.6; margin-bottom: 12px; font-size: 15px; }
+
+  .requests-block {
+    background: #F8FAFC;
+    padding: 20px;
+    border-radius: 16px;
+    margin: 20px 0;
+  }
+  .requests-block h3 { font-size: 16px; font-weight: 700; color: #0F172A; margin-bottom: 12px; }
+  .requests-block ul { padding-left: 20px; margin: 0; }
+  .requests-block li { color: #334155; margin-bottom: 6px; font-size: 14px; }
+
+  .btn-primary {
+    display: inline-block;
+    background: #0F172A;
+    color: #fff;
+    padding: 14px 28px;
+    border-radius: 100px;
+    font-weight: 600;
+    text-decoration: none;
+    margin-top: 12px;
+  }
+
+  .docs-section {
+    border-top: 1px solid #E2E8F0;
+    padding-top: 32px;
+  }
+  .docs-section h2 { font-size: 22px; font-weight: 800; color: #0F172A; margin-bottom: 20px; }
+  
+  .docs-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+    gap: 16px;
+  }
+
+  .doc-item {
+    display: block;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid #E2E8F0;
+    background: #F1F5F9;
+    aspect-ratio: 3/4;
+    transition: transform 0.2s;
+  }
+  .doc-item:hover { transform: scale(1.04); }
+  .doc-item img { width: 100%; height: 100%; object-fit: cover; }
+
+  @media (max-width: 768px) {
+    .spec-main-info { flex-direction: column; }
+    .spec-detail-img { width: 100%; height: 300px; }
+  }
+</style>
